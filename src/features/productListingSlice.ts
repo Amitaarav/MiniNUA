@@ -42,12 +42,15 @@ export const fetchCategories = createAsyncThunk<string[]>(
   }
 );
 
-const initialState: ProductState = {
+export type SortMode = 'relevance' | 'price-asc' | 'price-desc' | 'rating-desc';
+
+const initialState: ProductState & { sort: SortMode } = {
   products: [],
   categories: [],
   loading: false,
   error: null,
   filter: { title: '', category: '' },
+  sort: 'relevance',
 };
 
 const productListingSlice = createSlice({
@@ -59,6 +62,9 @@ const productListingSlice = createSlice({
     },
     clearFilter(state) {
       state.filter = { title: '', category: '' };
+    },
+    setSort(state, action: PayloadAction<SortMode>) {
+      state.sort = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -81,5 +87,5 @@ const productListingSlice = createSlice({
   },
 });
 
-export const { setFilter, clearFilter } = productListingSlice.actions;
+export const { setFilter, clearFilter, setSort } = productListingSlice.actions;
 export default productListingSlice.reducer;

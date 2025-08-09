@@ -1,10 +1,12 @@
 import { HomeCarousel } from "./HomeCarousel";
 import data  from "@/lib/data";
+import FeaturedProducts from "./FeaturedProducts";
 export default function Home() {
     return (
         <div className="w-full">
             <HomeCarousel items={data.carousel} />
-            <h2 className="h1-bold my-4">Products</h2>
+            <h1 className="text-2xl font-bold">Products</h1>
+            <FeaturedProducts />
         </div>
     );
 }

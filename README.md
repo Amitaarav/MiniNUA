@@ -6,26 +6,34 @@ MiniNUA is a front-end focused, single-page e-commerce application built with Re
 ## Features
 - Product Listing (/) with responsive grid
   - Search by title and filter by category
-  - Loading states and error handling
+  - Sorting: relevance, price (low→high, high→low), rating
+  - Loading states with skeleton placeholders and error handling
+
 - Product Detail (/product/:id)
   - Image, title, description, price, rating
   - Add to Cart with quantity selector (1–5)
+
 - Shopping Cart (/cart)
   - List items with thumbnail, title, unit price, qty selector (1–10)
   - Remove items, update quantity, and view subtotals
   - Grand total and Proceed to Checkout
+
 - Checkout (/checkout)
   - Order summary
   - Validated form: name, email, address
   - Place Order clears cart and shows confirmation
+
 - Data Caching and Persistence
   - Product list and details cached in localStorage
   - Cart state persisted in localStorage
+
 - Global State
   - Redux Toolkit slices for listing, detail, cart, and checkout
+  
 - Responsive, accessible UI
   - Keyboard-accessible sidebar
   - Semantic roles/labels on form and search
+  - Cart item count badge in the header
 
 ## Tech Stack
 - React 19 + Vite 7 + TypeScript 5
@@ -79,12 +87,12 @@ src/
         HomeCarousel.tsx     # Embla carousel
     ui/                      # UI primitives
   pages/
-    ProductListPage.tsx      # Listing + filters, loading/error
+    ProductListPage.tsx      # Listing + filters, sorting, skeletons, loading/error
     ProductDetailPage.tsx    # Product detail + add to cart
     CartPage.tsx             # Cart operations and totals
     CheckoutPage.tsx         # Form validation + confirmation
   features/                  # Redux slices
-    productListingSlice.ts   # Products, categories, filters
+    productListingSlice.ts   # Products, categories, filters, sorting
     productDetailsSlice.ts   # Product detail (+ caching)
     shoppingCartSlice.ts     # Cart + localStorage persistence
     checkOutSlice.ts         # Checkout submit state
@@ -100,6 +108,7 @@ src/
   - `fetchProducts` loads all products (cached under `cache.products`)
   - `fetchCategories` loads categories (cached under `cache.categories`)
   - `setFilter` and `clearFilter` maintain `{ title, category }`
+  - `setSort` manages sorting (`relevance`, `price-asc`, `price-desc`, `rating-desc`)
 - `productDetailsSlice`
   - `fetchProductDetail(id)` loads a product (cached under `cache.product.{id}`)
 - `shoppingCartSlice`
@@ -119,6 +128,10 @@ src/
 ## UI/UX Notes
 - Sidebar (All) opens from the left and is keyboard dismissible (Escape or overlay click). Focus moves to the close button on open for accessibility.
 - Search bar uses dynamic categories and submits via client-side navigation without reload.
+- Search enhancements: debounced navigation on `/search` (300ms), live product title suggestions, clear button to reset query, category-aware query building, and URL param sync.
+- Product listing shows skeleton cards while loading; errors are displayed inline.
+- The header cart icon shows a live item count badge.
+- Carousel images: Removed srcSet/sizes to prevent the browser from picking a low‑res candidate. Ensure high‑resolution assets in `public/images/carouselImages`; increased banner height (`h-72 md:h-[28rem]`); optionally disable lazy for the first slide for sharper initial render; use `object-cover` (or `object-contain` to avoid cropping).
 - Quantity limits:
   - Add to Cart: 1–5
   - Cart quantity: 1–10
@@ -144,4 +157,3 @@ No environment variables are required. The app uses the public Fake Store API di
 
 ---
 
-Built with care for clarity, accessibility, and performance. 🚀

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import ImageLoader from '@/components/ImageLoader'
 
 type CardItem = {
   title: string
@@ -9,6 +10,7 @@ type CardItem = {
     items?: string[]
     image: string
     href: string
+    blurhash?: string
   }[]
 }
 
@@ -26,10 +28,9 @@ export function HomeCard({ cards }: { cards: CardItem[] }) {
                   to={item.href}
                   className='flex flex-col'
                 >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className='aspect-square object-scale-down max-w-full h-auto mx-auto'
+                  <ImageLoader
+                    imageUrl={item.image}
+                    blurhash={item.blurhash ?? ''}
                     height={120}
                     width={120}
                   />

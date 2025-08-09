@@ -45,9 +45,7 @@ export const HomeCarousel = ({ items }: { items: CarouselItemData[] }) => {
                     alt={`Banner: ${item.title}`}
                     decoding="async"
                     loading="lazy"
-                    srcSet={`${item.image}?w=640 640w, ${item.image}?w=1024 1024w, ${item.image}?w=1920 1920w`}
-                    sizes="(max-width: 768px) 100vw, 1920px"
-                    className="object-cover w-full h-64 md:h-96"
+                    className="object-cover w-full h-72 md:h-[40rem]"
                   />
 
                   <div className="absolute w-2/3 md:w-1/3 left-6 md:left-32 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-90 group-hover:opacity-100">
