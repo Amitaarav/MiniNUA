@@ -32,18 +32,16 @@ export const Search = () => {
     if (products.length === 0) dispatch(fetchProducts());
   }, [dispatch, categories.length, products.length]);
 
-  // Keep local state in sync when URL changes externally
   useEffect(() => {
     setQ(searchParams.get("q") ?? "");
     setCategory(searchParams.get("category") ?? "all");
   }, [searchParams]);
 
-  // Debounced navigation only when already on /search
   useEffect(() => {
     if (!location.pathname.startsWith("/search")) return;
     const handle = window.setTimeout(() => {
       const cat = category && category !== "all" ? category : "all";
-      navigate(`/search?category=${encodeURIComponent(cat)}&q=${encodeURIComponent(q)}` , { replace: true });
+      navigate(`/search?category=${encodeURIComponent(cat)}&q=${encodeURIComponent(q)}`, { replace: true });
     }, 300);
     return () => window.clearTimeout(handle);
   }, [q, category, location.pathname, navigate]);
@@ -65,22 +63,21 @@ export const Search = () => {
   const onClear = () => {
     setQ("");
     if (location.pathname.startsWith("/search")) {
-      navigate(`/search?category=${encodeURIComponent(category || "all")}&q=` , { replace: true });
+      navigate(`/search?category=${encodeURIComponent(category || "all")}&q=`, { replace: true });
     }
   };
 
   return (
     <form
       onSubmit={onSubmit}
-      className="relative flex w-full max-w-xl items-stretch h-10 text-2xl text-gray-100"
+      className="relative flex w-full max-w-xl gap-1 h-10 text-gray-100 items-center"
       role="search"
       aria-label={`${APP_NAME} search`}
     >
       {/* Category Dropdown */}
-      <Select value={category} onValueChange={(val) => setCategory(val)}
-        >
+      <Select value={category} onValueChange={(val) => setCategory(val)}>
         <SelectTrigger
-          className="h-full bg-gray-100 text-black focus:ring-1 focus:ring-primary"
+          className="h-10 bg-gray-100 dark:bg-gray-900 text-black dark:text-white rounded-l-md border border-gray-300 dark:border-gray-700 border-r-0 focus:ring-2 focus:ring-primary"
           aria-label="Select category"
           disabled={loading}
         >
@@ -103,31 +100,30 @@ export const Search = () => {
         <Input
           type="search"
           placeholder={`Search ${APP_NAME} products...`}
-          className="w-full bg-gray-100 text-black text-base h-full border-none rounded-none focus-visible:ring-2 focus-visible:ring-primary pr-8"
+          className="h-10 w-full bg-gray-100 dark:bg-gray-900 text-black dark:text-white text-base border border-gray-300 dark:border-gray-700 border-l-0 border-r-0 rounded-none focus-visible:ring-2 focus-visible:ring-primary pr-8"
           value={q}
           onChange={(e) => setQ(e.target.value)}
           aria-label="Search products"
           onFocus={() => setOpenSuggest(true)}
           onBlur={() => {
-            // Delay closing to allow click on suggestion
             blurTimeout.current = window.setTimeout(() => setOpenSuggest(false), 120);
           }}
         />
         {q && (
           <button
             type="button"
-            className="absolute right-1 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-gray-200"
+            className="absolute right-1 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-800"
             onClick={onClear}
             aria-label="Clear search"
           >
-            <XIcon className="w-4 h-4 text-black" />
+            <XIcon className="w-4 h-4 text-black dark:text-white" />
           </button>
         )}
 
         {/* Suggestions */}
         {openSuggest && suggestions.length > 0 && (
           <ul
-            className="absolute z-20 mt-1 w-full bg-white text-black border rounded shadow"
+            className="absolute z-20 mt-1 w-full bg-white dark:bg-gray-900 text-black dark:text-white border border-gray-300 dark:border-gray-700 rounded shadow"
             role="listbox"
             aria-label="Search suggestions"
             onMouseDown={(e) => e.preventDefault()}
@@ -136,7 +132,7 @@ export const Search = () => {
               <li key={p.id}>
                 <button
                   type="button"
-                  className="w-full text-left px-3 py-2 hover:bg-gray-100"
+                  className="w-full text-left px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800"
                   onClick={() => {
                     setQ(p.title);
                     setOpenSuggest(false);
@@ -156,7 +152,7 @@ export const Search = () => {
       {/* Search Button */}
       <button
         type="submit"
-        className="bg-yellow-400 cursor-pointer text-primary-foreground h-full px-3 py-2 rounded-r hover:bg-yellow-600 focus:ring-2 focus:ring-primary focus:outline-none"
+        className="h-10 bg-yellow-400 cursor-pointer text-black px-3 rounded-r-md border border-gray-300 dark:border-gray-700 border-l-0 hover:bg-yellow-500 focus:ring-2 focus:ring-primary focus:outline-none"
         aria-label="Submit search"
       >
         <SearchIcon className="h-5 w-5 text-black" />

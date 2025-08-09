@@ -12,6 +12,10 @@
   }
 }
 
+.body{
+  background-color: rgb(177, 175, 175);
+}
+
 @theme inline {
 
   --radius-sm: calc(var(--radius) - 4px);

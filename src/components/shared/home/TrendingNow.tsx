@@ -4,6 +4,7 @@ import { fetchProducts } from '@/features/productListingSlice';
 import { addItem } from '@/features/shoppingCartSlice';
 import { Link } from 'react-router-dom';
 import type { Product } from '@/types';
+import StarRating from '@/components/shared/StarRating';
 
 export default function TrendingNow() {
   const dispatch = useAppDispatch();
@@ -43,6 +44,7 @@ export default function TrendingNow() {
               <Link to={`/product/${p.id}`} className='flex-1'>
                 <img src={p.image} alt={p.title} className='w-full h-40 object-contain mb-2 bg-white' />
                 <div className='text-sm line-clamp-2 mb-1'>{p.title}</div>
+                <div className='mb-1'><StarRating rate={p.rating?.rate} count={p.rating?.count} /></div>
                 <div className='font-semibold'>${p.price.toFixed(2)}</div>
               </Link>
               <button

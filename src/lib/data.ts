@@ -1,3 +1,5 @@
+const base = (import.meta as any).env.BASE_URL || '/';
+
 const data = {
     headerMenus:[
         {
@@ -38,21 +40,21 @@ const data = {
     title: 'Gentle & Rash-Free Sanitary Pads',
     buttonCaption: 'Shop Now',
     url: '/search?category=sanitary-pads&q=gentle%20rash%20free',
-    image: '/images/carouselImages/nua-banner1.jpeg',
+    image: `/images/carouselImages/nua-banner1.jpg`,
     isPublished: true
 },
 {
     title: 'Personal Hygiene Essentials',
     buttonCaption: 'Shop Now',
     url: '/search?category=hygiene&q=essentials',
-    image: '/images/carouselImages/nua-banner2.jpeg',
+    image: `/images/carouselImages/nua-banner2.jpeg`,
     isPublished: true
 },
 {
     title: 'Customised Period Care Packs',
     buttonCaption: 'Shop Now',
     url: '/search?category=period-care&q=customised%20packs',
-    image: '/images/carouselImages/nua-banner3.jpeg',
+    image: `/images/carouselImages/nua-banner3.jpeg`,
     isPublished: true
 }
 

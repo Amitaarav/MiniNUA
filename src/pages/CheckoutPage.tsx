@@ -27,10 +27,10 @@ export default function CheckoutPage() {
     }
     dispatch(submitOrder());
     try {
-      // Simulate an API call delay
+      // to simulate an API call delay
       await new Promise((r) => setTimeout(r, 800));
       const orderItems: OrderItemSummary[] = items.map((i) => ({ id: i.id, title: i.title, price: i.price, quantity: i.quantity }));
-      // Normally you would POST to a server here.
+      // Normally we would POST to a server here.
       console.log('Order placed', { name, email, address, orderItems, total: grandTotal });
       dispatch(submitOrderSuccess());
       dispatch(clearCart());

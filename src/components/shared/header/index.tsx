@@ -7,12 +7,13 @@ import { Link } from "react-router-dom";
 import data from "@/lib/data";
 import { useState } from "react";
 import Sidebar from "./SideBar";
+import ThemeToggle from "./ThemeToggle";
 
 export const Header = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <header className="bg-gray-950 text-white w-full">
+        <header className="bg-pink-950 text-white w-full">
             <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
             <div className="px-2 w-full">
                 <div className="flex items-center justify-between py-2">
@@ -38,6 +39,7 @@ export const Header = () => {
 
                     {/* Menu */}
                     <div className="flex items-center gap-2">
+                        <ThemeToggle />
                         <Menu />
                     </div>
                 </div>

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { fetchProducts, fetchCategories, setFilter, setSort, type SortMode } from '@/features/productListingSlice';
 import type { Product } from '@/types';
+import StarRating from '@/components/shared/StarRating';
 import { Link, useSearchParams } from 'react-router-dom';
 
 export default function ProductListPage() {
@@ -109,6 +110,7 @@ export default function ProductListPage() {
             <Link to={`/product/${p.id}`} key={p.id} className='border rounded p-3 hover:shadow'>
               <img src={p.image} alt={p.title} className='w-full h-48 object-contain mb-2 bg-white' />
               <div className='text-sm line-clamp-2 mb-1'>{p.title}</div>
+              <div className='mb-1'><StarRating rate={p.rating?.rate} count={p.rating?.count} /></div>
               <div className='font-semibold'>${p.price.toFixed(2)}</div>
             </Link>
           ))}
