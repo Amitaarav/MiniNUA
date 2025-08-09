@@ -1,0 +1,3 @@
+export const APP_NAME = import.meta.env.VITE_APP_NAME || 'MiniNUA';
+export const APP_SLOGAN = import.meta.env.VITE_APP_SLOGAN || 'Gentle Care...';
+export const APP_DESCRIPTION = import.meta.env.VITE_APP_DESCRIPTION || 'MiniNua offers safe, ultra-soft sanitary pads and personal care products, customized for your needs and delivered discreetly to your doorstep. Comfort, confidence, and care—every month.';
