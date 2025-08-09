@@ -73,34 +73,64 @@ No server or API key required.
 - `/checkout` — Checkout
 
 ## Project Structure (key paths)
+
 ```
 src/
-  App.tsx                     # Router and page layout
+  assets/                       # Static images and icons
   components/
     shared/
       header/
-        index.tsx            # Header + menu, search, sidebar trigger
-        Search.tsx           # Search with dynamic categories
-        SideBar.tsx          # Slide-in sidebar with categories
+        index.tsx               # Header layout and logic
+        Menu.tsx                # Header menu (sign in, cart)
+        Search.tsx              # Search bar with category select
+        SideBar.tsx             # Sidebar navigation
+        ThemeToggle.tsx         # Theme switcher (light/dark)
       home/
-        Home.tsx             # Carousel + section title
-        HomeCarousel.tsx     # Embla carousel
-    ui/                      # UI primitives
+        FeaturedProducts.tsx    # Featured products section
+        Home.tsx                # Home page section
+        HomeCard.tsx            # Card for home products
+        HomeCarousel.tsx        # Carousel for banners
+        RecentlyViewed.tsx      # Recently viewed products
+        TrendingNow.tsx         # Trending products section
+        Footer.tsx              # Footer component
+        StarRating.tsx          # Star rating UI
+    ui/
+      ImageLoader.tsx           # Progressive image loader with blurhash
+  features/
+    checkOutSlice.ts            # Redux slice for checkout state
+    productDetailsSlice.ts      # Redux slice for product details
+    productListingSlice.ts      # Redux slice for product listing
+    shoppingCartSlice.ts        # Redux slice for cart state
+  lib/
+    constant.ts                 # App constants (name, slogan, description)
+    data.ts                     # Static data for menus and carousel
+    utils.ts                    # Utility functions (e.g., cn for classnames)
   pages/
-    ProductListPage.tsx      # Listing + filters, sorting, skeletons, loading/error
-    ProductDetailPage.tsx    # Product detail + add to cart
-    CartPage.tsx             # Cart operations and totals
-    CheckoutPage.tsx         # Form validation + confirmation
-  features/                  # Redux slices
-    productListingSlice.ts   # Products, categories, filters, sorting
-    productDetailsSlice.ts   # Product detail (+ caching)
-    shoppingCartSlice.ts     # Cart + localStorage persistence
-    checkOutSlice.ts         # Checkout submit state
+    CartPage.tsx                # Shopping cart operations
+    CheckoutPage.tsx            # Checkout form and confirmation
+    ProductDetailPage.tsx       # Product details and add to cart
+    ProductListPage.tsx         # Product listing with filters and sorting
   store/
-    store.ts                 # Configure store
-    rootReducer.ts           # Combine slices
-    hooks.ts                 # Typed hooks
-  types/                     # App types aligned with Fake Store API
+    store.ts                    # Redux store configuration
+    hooks.ts                    # Typed Redux hooks
+  types/
+    index.d.ts                  # Type definitions for API and app
+  App.tsx                       # Main app component and router
+  App.css                       # Tailwind and theme CSS
+  index.css                     # Global CSS
+  main.tsx                      # App entry point
+  vite-env.d.ts                 # Vite environment types
+```
+
+**Notes:**
+- The `assets/` folder contains images and icons used throughout the app.
+- The `components/shared/header/` folder includes all header-related components, including theme toggling.
+- The `components/shared/home/` folder contains home page sections and UI elements.
+- The `features/` folder holds Redux slices for state management.
+- The `lib/` folder is for constants, static data, and utilities.
+- The `pages/` folder contains main route components.
+- The `store/` folder is for Redux store setup and hooks.
+- The `types/` folder is for TypeScript type definitions.
 ```
 
 ## State Management

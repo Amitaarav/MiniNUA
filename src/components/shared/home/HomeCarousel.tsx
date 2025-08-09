@@ -45,14 +45,14 @@ export const HomeCarousel = ({ items }: { items: CarouselItemData[] }) => {
                   decoding="async"
                   loading={idx === 0 ? "eager" : "lazy"}
                   fetchPriority={idx === 0 ? "high" : "auto"}
-                  className="object-cover w-full h-72 md:h-[32rem]"
+                  className="object-cover w-full h-72 md:h-[36rem]"
                 />
 
                 <div className="absolute w-2/3 md:w-1/3 left-6 md:left-32 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-90 group-hover:opacity-100">
-                  <h2 className="text-lg md:text-6xl font-bold mb-4 text-yellow-300  drop-shadow-lg">
+                  <h2 className="text-lg md:text-6xl font-bold mb-4 text-gray-600  drop-shadow-lg">
                     {item.title}
                   </h2>
-                  <Button className="hidden md:inline-block">{item.buttonCaption}</Button>
+                  <Button className="hidden md:inline-block bg-gray-800 text-white">{item.buttonCaption}</Button>
                 </div>
               </Link>
             </CarouselItem>
