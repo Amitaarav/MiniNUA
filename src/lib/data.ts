@@ -1,5 +1,3 @@
-const base = (import.meta as any).env.BASE_URL || '/';
-
 const data = {
     headerMenus:[
         {
