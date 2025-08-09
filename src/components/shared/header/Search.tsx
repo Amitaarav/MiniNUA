@@ -77,9 +77,10 @@ export const Search = () => {
       aria-label={`${APP_NAME} search`}
     >
       {/* Category Dropdown */}
-      <Select value={category} onValueChange={(val) => setCategory(val)}>
+      <Select value={category} onValueChange={(val) => setCategory(val)}
+        >
         <SelectTrigger
-          className="h-full bg-gray-100 text-black focus:ring-2 focus:ring-primary"
+          className="h-full bg-gray-100 text-black focus:ring-1 focus:ring-primary"
           aria-label="Select category"
           disabled={loading}
         >

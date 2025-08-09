@@ -3,6 +3,9 @@ import { useParams, Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { fetchProductDetail } from '@/features/productDetailsSlice';
 import { addItem } from '@/features/shoppingCartSlice';
+import type { Product } from '@/types';
+
+const RECENT_KEY = 'recentlyViewed';
 
 export default function ProductDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -13,6 +16,17 @@ export default function ProductDetailPage() {
   useEffect(() => {
     if (id) dispatch(fetchProductDetail(id));
   }, [id, dispatch]);
+
+  useEffect(() => {
+    if (!product) return;
+    try {
+      const raw = localStorage.getItem(RECENT_KEY);
+      const list = raw ? (JSON.parse(raw) as Array<Pick<Product, 'id' | 'title' | 'image' | 'price'>>) : [];
+      const filtered = list.filter((p) => p.id !== product.id);
+      const updated = [{ id: product.id, title: product.title, image: product.image, price: product.price }, ...filtered].slice(0, 20);
+      localStorage.setItem(RECENT_KEY, JSON.stringify(updated));
+    } catch {}
+  }, [product]);
 
   if (loading) return <div className='py-8'>Loading...</div>;
   if (error) return <div className='py-8 text-red-600'>{error}</div>;

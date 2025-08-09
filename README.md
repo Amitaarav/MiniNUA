@@ -29,7 +29,7 @@ MiniNUA is a front-end focused, single-page e-commerce application built with Re
 
 - Global State
   - Redux Toolkit slices for listing, detail, cart, and checkout
-  
+
 - Responsive, accessible UI
   - Keyboard-accessible sidebar
   - Semantic roles/labels on form and search
@@ -125,13 +125,49 @@ src/
   - `cart.state`: Cart items and grand total
 - Cache is read on revisit to avoid redundant fetches.
 
+## Caching & Persistence
+
+MiniNUA uses **persistent caching with localStorage** to ensure fast revisits and a smooth user experience.  
+Here's how caching is established:
+
+- **On first load:**  
+  Product lists, product details, and categories are fetched from the Fake Store API and saved in localStorage under specific keys.
+- **On revisit:**  
+  Before making any API request, the app checks localStorage for cached data. If found, it loads instantly from cache, reducing network calls and speeding up page loads.
+- **Cart state:**  
+  All cart actions (add, remove, update quantity) are immediately reflected in localStorage, so the cart persists across sessions and browser reloads.
+- **Cache keys used:**
+  - `cache.products`: Product list
+  - `cache.categories`: Categories
+  - `cache.product.{id}`: Product detail by id
+  - `cart.state`: Cart items and grand total
+
+**Example logic:**
+```typescript
+// On product list fetch
+const cachedProducts = localStorage.getItem('cache.products');
+if (cachedProducts) {
+  // Use cached data
+} else {
+  // Fetch from API, then cache
+  localStorage.setItem('cache.products', JSON.stringify(fetchedProducts));
+}
+```
+
+This approach ensures that users experience fast page loads and minimal waiting time, even on repeat visits.
+
 ## UI/UX Notes
 - Sidebar (All) opens from the left and is keyboard dismissible (Escape or overlay click). Focus moves to the close button on open for accessibility.
+
 - Search bar uses dynamic categories and submits via client-side navigation without reload.
+
 - Search enhancements: debounced navigation on `/search` (300ms), live product title suggestions, clear button to reset query, category-aware query building, and URL param sync.
+
 - Product listing shows skeleton cards while loading; errors are displayed inline.
 - The header cart icon shows a live item count badge.
+
 - Carousel images: Removed srcSet/sizes to prevent the browser from picking a low‑res candidate. Ensure high‑resolution assets in `public/images/carouselImages`; increased banner height (`h-72 md:h-[28rem]`); optionally disable lazy for the first slide for sharper initial render; use `object-cover` (or `object-contain` to avoid cropping).
+
 - Quantity limits:
   - Add to Cart: 1–5
   - Cart quantity: 1–10
