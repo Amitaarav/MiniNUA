@@ -4,6 +4,7 @@ import { fetchProducts, fetchCategories, setFilter, setSort, type SortMode } fro
 import type { Product } from '@/types';
 import StarRating from '@/components/shared/StarRating';
 import { Link, useSearchParams } from 'react-router-dom';
+import ImageHover from '@/components/ImageHover';
 
 export default function ProductListPage() {
   const dispatch = useAppDispatch();
