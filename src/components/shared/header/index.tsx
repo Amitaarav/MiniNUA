@@ -13,7 +13,7 @@ export const Header = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-gray-950 text-white w-full mb-20">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-gray-950 text-white w-full">
             <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
             <div className="px-2 w-full">
                 <div className="flex items-center justify-between py-2">

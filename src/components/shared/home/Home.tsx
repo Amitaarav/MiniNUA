@@ -6,7 +6,7 @@ import RecentlyViewed from "./RecentlyViewed";
 
 export default function Home() {
     return (
-        <div className="w-full mt-28">
+        <div className="w-full">
             <HomeCarousel items={data.carousel} />
             <div className="container mx-auto px-4">
               <FeaturedProducts />  
