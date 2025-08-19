@@ -70,7 +70,7 @@ export const Search = () => {
   return (
     <form
       onSubmit={onSubmit}
-      className="relative flex w-full max-w-xl gap-1 h-10 text-gray-100 items-center"
+      className="relative flex w-full max-w-xl gap-1 h-10 text-gray-100 items-center border-2"
       role="search"
       aria-label={`${APP_NAME} search`}
     >
